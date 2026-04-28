@@ -1,0 +1,947 @@
+可以帮我上面的前端网页代码改成我自己的么
+
+帮我创建1个电脑展示页 就跟上面的readdy生成的一样内容
+
+index.html(new)
++1037
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>品牌电脑展示页</title>
+  <style>
+    :root {
+      --bg: #f7f2eb;
+      --panel: rgba(255, 255, 255, 0.88);
+      --panel-strong: #ffffff;
+      --text: #2b2118;
+      --muted: #7a6b5d;
+      --line: #eadbca;
+      --primary: #c46d2d;
+      --primary-dark: #9e541f;
+      --accent: #f3c98b;
+      --shadow: 0 18px 45px rgba(91, 57, 22, 0.12);
+      --radius: 22px;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(243, 201, 139, 0.36), transparent 28%),
+        radial-gradient(circle at top right, rgba(196, 109, 45, 0.12), transparent 24%),
+        linear-gradient(180deg, #fbf7f2 0%, var(--bg) 100%);
+    }
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(255, 251, 246, 0.82);
+      border-bottom: 1px solid rgba(234, 219, 202, 0.8);
+    }
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      gap: 16px;
+    }
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .logo span {
+      color: var(--primary);
+    }
+    .nav-note {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .hero {
+      padding: 56px 0 28px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+    .hero-card,
+    .hero-side {
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+    }
+    .hero-card {
+      padding: 42px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #fff4e6;
+      color: var(--primary-dark);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    h1 {
+      margin: 18px 0 14px;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.08;
+    }
+    .hero-card p {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 640px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(196, 109, 45, 0.24);
+    }
+    .btn-secondary {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+    .hero-side {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100%;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.95), rgba(253, 241, 226, 0.94));
+    }
+    .laptop-visual {
+      position: relative;
+      border-radius: 24px;
+      min-height: 280px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(243, 201, 139, 0.55), transparent 35%),
+        linear-gradient(135deg, #fff8ef 0%, #f2d6b4 100%);
+      display: grid;
+      place-items: center;
+    }
+    .laptop {
+      width: min(92%, 380px);
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #3d3d43, #1b1d22);
+      border-radius: 18px 18px 12px 12px;
+      padding: 14px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+    .screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.45), transparent 20%),
+        linear-gradient(135deg, #f9d7a0, #c46d2d 55%, #5b2c08);
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      color: #fff;
+      font-weight: 800;
+      padding: 18px;
+      font-size: 24px;
+    }
+    .base {
+      width: min(98%, 410px);
+      height: 18px;
+      background: linear-gradient(180deg, #bfc2c8, #8d9097);
+      border-radius: 0 0 30px 30px;
+      margin: 0 auto;
+      box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.4);
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .stat {
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(234, 219, 202, 0.9);
+      border-radius: 18px;
+    }
+    .stat strong {
+      display: block;
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+    .section {
+      padding: 24px 0;
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: end;
+      margin-bottom: 20px;
+    }
+    .section-head h2 {
+      margin: 0 0 6px;
+      font-size: 30px;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .brand-switcher {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin: 18px 0 30px;
+    }
+    .brand-btn {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: 22px;
+      padding: 22px 18px;
+      text-align: left;
+      cursor: pointer;
+      transition: 0.25s ease;
+      box-shadow: 0 8px 18px rgba(91, 57, 22, 0.06);
+    }
+    .brand-btn strong {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+    .brand-btn span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .brand-btn.active {
+      background: linear-gradient(135deg, #d07a39, #b25c1f);
+      color: #fff;
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px rgba(196, 109, 45, 0.22);
+      border-color: transparent;
+    }
+    .brand-btn.active span {
+      color: rgba(255, 255, 255, 0.84);
+    }
+    .brand-summary {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+    .summary-card {
+      background: var(--panel-strong);
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      padding: 24px;
+      box-shadow: 0 12px 28px rgba(91, 57, 22, 0.08);
+    }
+    .summary-card h3 {
+      margin: 0 0 10px;
+      font-size: 26px;
+    }
+    .summary-card p,
+    .summary-card li {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+    .summary-card ul {
+      margin: 12px 0 0;
+      padding-left: 18px;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+    .product-card {
+      background: var(--panel-strong);
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 26px rgba(91, 57, 22, 0.08);
+      overflow: hidden;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 34px rgba(91, 57, 22, 0.14);
+    }
+    .product-visual {
+      padding: 22px;
+      background:
+        linear-gradient(180deg, #fff7ed 0%, #f8ead8 100%);
+      border-bottom: 1px solid var(--line);
+    }
+    .mini-laptop {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.34), transparent 18%),
+        linear-gradient(135deg, #f2b766, #bf6828 60%, #603011);
+      position: relative;
+      box-shadow: inset 0 0 0 10px #2f3135;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .tag-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 56px;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+    .tag-hot {
+      background: #ffe2cf;
+      color: #a54613;
+    }
+    .tag-new {
+      background: #f9e7b5;
+      color: #8c6415;
+    }
+    .tag-series {
+      background: #efe6da;
+      color: #6a5a4d;
+    }
+    .product-body {
+      padding: 20px 20px 18px;
+    }
+    .product-body h3 {
+      margin: 0;
+      font-size: 24px;
+    }
+    .subtitle {
+      margin: 8px 0 12px;
+      color: var(--muted);
+      min-height: 48px;
+      line-height: 1.7;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 14px 0 18px;
+    }
+    .meta-item {
+      background: #faf5ef;
+      border-radius: 14px;
+      padding: 12px;
+      border: 1px solid #f0e2d2;
+    }
+    .meta-item small {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .price {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+    .detail-btn {
+      width: 100%;
+      margin-top: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 14px;
+      padding: 13px 16px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .detail {
+      display: none;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--line);
+    }
+    .detail.open {
+      display: block;
+    }
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .spec {
+      background: #faf6f1;
+      border: 1px solid #efe2d4;
+      border-radius: 12px;
+      padding: 10px 12px;
+    }
+    .spec span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+    .highlights {
+      margin: 14px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+    .footer {
+      margin-top: 50px;
+      background: #2b2118;
+      color: rgba(255, 255, 255, 0.88);
+    }
+    .footer-grid {
+      padding: 42px 0;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr 1fr;
+      gap: 26px;
+    }
+    .footer h4 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      color: #fff;
+    }
+    .footer p,
+    .footer li {
+      color: rgba(255, 255, 255, 0.72);
+      line-height: 1.8;
+      margin: 0;
+    }
+    .footer ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 16px 0 28px;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 14px;
+    }
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .brand-summary,
+      .footer-grid,
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+      .stats,
+      .brand-switcher {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 720px) {
+      .hero-card,
+      .summary-card,
+      .hero-side {
+        padding: 20px;
+      }
+      .section-head {
+        align-items: start;
+        flex-direction: column;
+      }
+      .meta,
+      .spec-grid {
+        grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: 34px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="logo">电脑<span>展示页</span></div>
+      <div class="nav-note">Dell / HP / Lenovo 商务笔记本精选</div>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-card">
+          <div class="badge">商务笔记本精选推荐</div>
+          <h1>探索商务笔记本新标准</h1>
+          <p>
+            这是一个品牌电脑展示页，支持 Dell、HP、Lenovo 三大品牌切换，
+            集中展示热门商务本型号、核心配置、价格区间和产品亮点，方便你快速查看与对比。
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" onclick="document.getElementById('brands').scrollIntoView({behavior:'smooth'})">立即查看型号</button>
+            <button class="btn btn-secondary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">浏览产品详情</button>
+          </div>
+        </div>
+        <div class="hero-side">
+          <div class="laptop-visual">
+            <div>
+              <div class="laptop">
+                <div class="screen">Business Laptop</div>
+              </div>
+              <div class="base"></div>
+            </div>
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <strong id="brandCount">3</strong>
+              <span>品牌数量</span>
+            </div>
+            <div class="stat">
+              <strong id="productCount">21</strong>
+              <span>在售展示机型</span>
+            </div>
+            <div class="stat">
+              <strong>可切换</strong>
+              <span>品牌与详情</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="brands">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>品牌切换</h2>
+            <p>点击不同品牌即可切换下方产品列表和品牌说明，整体内容与上面你提供的 Readdy 页面一致。</p>
+          </div>
+        </div>
+        <div class="brand-switcher" id="brandSwitcher"></div>
+        <div class="brand-summary" id="brandSummary"></div>
+      </div>
+    </section>
+    <section class="section" id="products">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>产品展示</h2>
+            <p>点击“查看详情”可以展开该机型的技术参数与亮点说明。</p>
+          </div>
+        </div>
+        <div class="product-grid" id="productGrid"></div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>品牌电脑展示页</h4>
+        <p>聚焦企业办公、移动商务与高性价比机型，适合二手设备展示、渠道选型和客户介绍页面。</p>
+      </div>
+      <div>
+        <h4>快速导航</h4>
+        <ul>
+          <li>品牌切换</li>
+          <li>产品展示</li>
+          <li>技术规格</li>
+          <li>型号亮点</li>
+        </ul>
+      </div>
+      <div>
+        <h4>展示品牌</h4>
+        <ul>
+          <li>Dell Latitude</li>
+          <li>HP ProBook / EliteBook</li>
+          <li>Lenovo ThinkPad / Yoga</li>
+        </ul>
+      </div>
+      <div>
+        <h4>页面说明</h4>
+        <p>这个页面是按你给的 Readdy 内容重建的纯前端版本，后续你要再加型号、换图片、改价格，我都可以继续帮你改。</p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      © 2026 品牌电脑展示页
+    </div>
+  </footer>
+  <script>
+    const brands = {
+      dell: {
+        name: "Dell",
+        intro: "Dell Latitude 系列以稳定耐用、接口丰富和商务定位清晰著称，覆盖从高性价比办公机到 E 系列经典商务本。",
+        points: [
+          "Latitude 3000 与 E5000 系列覆盖主流商务办公需求",
+          "多款机型支持大电池与全尺寸键盘",
+          "适合企业办公、日常销售展示与批量选型"
+        ],
+        products: [
+          {
+            model: "3500",
+            series: "Latitude 3000",
+            tagline: "主流商务办公本，性能均衡",
+            price: "¥3,899",
+            badge: "",
+            specs: { cpu: "i5-8265U", ram: "8GB", storage: "256GB NVMe SSD", screen: "15.6英寸 FHD", weight: "1.98kg", battery: "42Wh", graphics: "Intel UHD", ports: "HDMI / RJ45 / USB 3.1" },
+            highlights: ["第八代酷睿处理器", "适合日常办公与文档处理", "性价比高"]
+          },
+          {
+            model: "3570",
+            series: "Latitude 3000",
+            tagline: "配置均衡，适合日常企业办公",
+            price: "¥3,399",
+            badge: "",
+            specs: { cpu: "i5-6200U", ram: "8GB", storage: "256GB SSD", screen: "15.6英寸 HD", weight: "2.03kg", battery: "56Wh", graphics: "Intel HD 520", ports: "VGA / HDMI / USB 3.0" },
+            highlights: ["全尺寸键盘和数字小键盘", "适合基础商务场景", "价格亲民"]
+          },
+          {
+            model: "3580",
+            series: "Latitude 3000",
+            tagline: "入门商务本，兼顾扩展与维护",
+            price: "¥3,299",
+            badge: "",
+            specs: { cpu: "i5-7200U", ram: "8GB", storage: "500GB HDD", screen: "15.6英寸 HD", weight: "2.02kg", battery: "42Wh", graphics: "Intel HD 620", ports: "HDMI / VGA / RJ45 / USB 3.0" },
+            highlights: ["维护方便", "接口较丰富", "适合办公基础需求"]
+          },
+          {
+            model: "3590",
+            series: "Latitude 3000",
+            tagline: "第八代平台，商务办公更顺手",
+            price: "¥3,599",
+            badge: "",
+            specs: { cpu: "i5-8250U", ram: "8GB", storage: "256GB SSD", screen: "15.6英寸 FHD", weight: "1.95kg", battery: "42Wh", graphics: "Intel UHD 620", ports: "HDMI / RJ45 / USB 3.1" },
+            highlights: ["第八代四核心处理器", "适合多任务办公", "综合表现稳定"]
+          },
+          {
+            model: "E5540",
+            series: "Latitude E5000",
+            tagline: "经典 E 系列，大电池商务本",
+            price: "¥2,999",
+            badge: "",
+            specs: { cpu: "i5-4300U", ram: "8GB", storage: "500GB HDD", screen: "15.6英寸 HD", weight: "2.35kg", battery: "65Wh", graphics: "Intel HD 4400", ports: "VGA / HDMI / RJ45 / USB 3.0" },
+            highlights: ["经典商用机型", "续航表现好", "适合办公与仓库展示"]
+          },
+          {
+            model: "E5550",
+            series: "Latitude E5000",
+            tagline: "E 系列升级款，经典耐用",
+            price: "¥3,199",
+            badge: "HOT",
+            specs: { cpu: "i5-5300U", ram: "8GB", storage: "256GB SSD", screen: "15.6英寸 FHD", weight: "2.3kg", battery: "51Wh", graphics: "Intel HD 5500", ports: "HDMI / VGA / RJ45 / USB 3.0" },
+            highlights: ["带背光键盘", "商务外观稳重", "适合公司办公"]
+          },
+          {
+            model: "E5570",
+            series: "Latitude E5000",
+            tagline: "高端商务本，超长续航",
+            price: "¥3,599",
+            badge: "HOT",
+            specs: { cpu: "i5-6300U", ram: "8GB", storage: "256GB SSD", screen: "15.6英寸 FHD", weight: "2.09kg", battery: "62Wh", graphics: "Intel HD 520", ports: "HDMI / VGA / RJ45 / USB 3.0" },
+            highlights: ["续航可达 13 小时", "定位高于 E5550", "适合重度商务办公"]
+          },
+          {
+            model: "E3590",
+            series: "Latitude E3000",
+            tagline: "E 系列升级款，第八代平台",
+            price: "¥3,499",
+            badge: "NEW",
+            specs: { cpu: "i5-8350U", ram: "8GB", storage: "256GB SSD", screen: "15.6英寸 FHD", weight: "1.9kg", battery: "56Wh", graphics: "Intel UHD 620", ports: "USB-C / HDMI / RJ45 / USB 3.1" },
+            highlights: ["第八代酷睿", "支持 USB-C", "适合现代办公环境"]
+          }
+        ]
+      },
+      hp: {
+        name: "HP",
+        intro: "HP 产品线覆盖 ProBook、EliteBook 与 Dragonfly，兼顾轻薄商务、移动办公与高端旗舰需求。",
+        points: [
+          "从入门 ProBook 到高端 EliteBook 都有覆盖",
+          "轻薄机型丰富，适合随身商务携带",
+          "部分型号采用第 11 代酷睿与 Iris Xe 显卡"
+        ],
+        products: [
+          {
+            model: "430 G7",
+            series: "ProBook 400",
+            tagline: "便携商务本，适合日常办公",
+            price: "¥3,999",
+            badge: "",
+            specs: { cpu: "i5-10210U", ram: "8GB", storage: "256GB SSD", screen: "13.3英寸 FHD", weight: "1.49kg", battery: "45Wh", graphics: "Intel UHD", ports: "USB-C / HDMI / USB 3.1" },
+            highlights: ["第10代酷睿", "尺寸便携", "适合基础移动办公"]
+          },
+          {
+            model: "430 G8",
+            series: "ProBook 400",
+            tagline: "更轻更快的轻薄商务本",
+            price: "¥4,299",
+            badge: "NEW",
+            specs: { cpu: "i5-1135G7", ram: "8GB", storage: "256GB SSD", screen: "13.3英寸 FHD", weight: "1.38kg", battery: "45Wh", graphics: "Iris Xe", ports: "USB-C / HDMI / USB 3.2" },
+            highlights: ["第11代酷睿 + Iris Xe", "更轻机身", "适合差旅办公"]
+          },
+          {
+            model: "450 G3",
+            series: "ProBook 400",
+            tagline: "经典 15.6 英寸商务本",
+            price: "¥3,499",
+            badge: "",
+            specs: { cpu: "i5-6200U", ram: "8GB", storage: "256GB SSD", screen: "15.6英寸 HD", weight: "2.0kg", battery: "44Wh", graphics: "Intel HD 520", ports: "VGA / HDMI / RJ45 / USB 3.0" },
+            highlights: ["经典 ProBook 型号", "稳定耐用", "适合办公展示"]
+          },
+          {
+            model: "650 G4",
+            series: "ProBook 600",
+            tagline: "商务扩展能力强，办公体验稳",
+            price: "¥3,799",
+            badge: "",
+            specs: { cpu: "i5-8250U", ram: "8GB", storage: "256GB SSD", screen: "15.6英寸 FHD", weight: "2.18kg", battery: "48Wh", graphics: "Intel UHD 620", ports: "USB-C / HDMI / VGA / RJ45" },
+            highlights: ["第八代平台", "企业办公友好", "接口齐全"]
+          },
+          {
+            model: "650 G5",
+            series: "ProBook 600",
+            tagline: "进阶 15.6 英寸商务办公本",
+            price: "¥4,299",
+            badge: "",
+            specs: { cpu: "i5-8265U", ram: "8GB", storage: "512GB SSD", screen: "15.6英寸 FHD", weight: "2.18kg", battery: "56Wh", graphics: "Intel UHD 620", ports: "USB-C / HDMI / RJ45 / USB 3.1" },
+            highlights: ["大容量 SSD", "适合多资料办公", "整体配置更均衡"]
+          },
+          {
+            model: "830 G7",
+            series: "EliteBook 800",
+            tagline: "轻薄高端商务本，差旅优选",
+            price: "¥4,599",
+            badge: "HOT",
+            specs: { cpu: "i5-10210U", ram: "8GB", storage: "256GB SSD", screen: "13.3英寸 FHD", weight: "1.17kg", battery: "53Wh", graphics: "Intel UHD", ports: "Thunderbolt / HDMI / USB-A" },
+            highlights: ["仅 1.17kg", "便携性优秀", "适合高频出差人群"]
+          },
+          {
+            model: "830 G8",
+            series: "EliteBook 800",
+            tagline: "第 11 代酷睿高端商务机",
+            price: "¥5,299",
+            badge: "NEW",
+            specs: { cpu: "i5-1135G7", ram: "16GB", storage: "512GB SSD", screen: "13.3英寸 FHD", weight: "1.19kg", battery: "53Wh", graphics: "Iris Xe", ports: "Thunderbolt 4 / HDMI / USB-A" },
+            highlights: ["16GB 内存", "Iris Xe 显卡", "高端商务定位"]
+          },
+          {
+            model: "Dragonfly",
+            series: "Elite Dragonfly",
+            tagline: "HP 旗舰轻薄商务本",
+            price: "¥5,999",
+            badge: "NEW",
+            specs: { cpu: "i5-8265U", ram: "16GB", storage: "512GB NVMe SSD", screen: "13.3英寸 触控屏", weight: "0.99kg", battery: "56Wh", graphics: "Intel UHD 620", ports: "Thunderbolt / USB-C / USB-A" },
+            highlights: ["仅 0.99kg", "旗舰轻薄定位", "触控屏设计"]
+          },
+          {
+            model: "MT43",
+            series: "Mobile Thin Client",
+            tagline: "轻办公终端，价格友好",
+            price: "¥2,999",
+            badge: "",
+            specs: { cpu: "AMD Pro A6", ram: "8GB", storage: "128GB SSD", screen: "14英寸 HD", weight: "1.54kg", battery: "47Wh", graphics: "AMD Radeon", ports: "HDMI / RJ45 / USB 3.0" },
+            highlights: ["轻量办公方案", "价格较低", "适合终端展示与基础办公"]
+          }
+        ]
+      },
+      lenovo: {
+        name: "Lenovo",
+        intro: "Lenovo 以 ThinkPad 系列为核心，结合 Yoga 翻转本，适合传统商务与灵活移动办公场景。",
+        points: [
+          "ThinkPad 经典键盘手感与商务基因",
+          "包含可翻转的 Yoga 370",
+          "L 系列兼顾价格与实用性"
+        ],
+        products: [
+          {
+            model: "Yoga 370",
+            series: "ThinkPad Yoga",
+            tagline: "360° 翻转触控商务本",
+            price: "¥3,899",
+            badge: "HOT",
+            specs: { cpu: "i5-7300U", ram: "8GB", storage: "256GB SSD", screen: "13.3英寸 触控屏", weight: "1.37kg", battery: "52Wh", graphics: "Intel HD 620", ports: "HDMI / USB 3.0 / Type-C" },
+            highlights: ["可翻转设计", "支持触控书写", "适合灵活办公场景"]
+          },
+          {
+            model: "T470",
+            series: "ThinkPad T",
+            tagline: "双电池经典商务本",
+            price: "¥3,699",
+            badge: "",
+            specs: { cpu: "i5-7300U", ram: "8GB", storage: "256GB SSD", screen: "14英寸 FHD", weight: "1.58kg", battery: "双电池设计", graphics: "Intel HD 620", ports: "HDMI / RJ45 / USB 3.0 / Type-C" },
+            highlights: ["经典 ThinkPad T 系列", "双电池设计", "键盘手感出色"]
+          },
+          {
+            model: "L580",
+            series: "ThinkPad L",
+            tagline: "15.6 英寸高性价比商务本",
+            price: "¥3,499",
+            badge: "",
+            specs: { cpu: "i5-8250U", ram: "8GB", storage: "256GB SSD", screen: "15.6英寸 FHD", weight: "2.0kg", battery: "45Wh", graphics: "Intel UHD 620", ports: "HDMI / RJ45 / USB-C / USB 3.0" },
+            highlights: ["性价比优秀", "适合办公与展示", "屏幕尺寸更大"]
+          },
+          {
+            model: "L590",
+            series: "ThinkPad L",
+            tagline: "大屏商务办公，稳定实用",
+            price: "¥3,899",
+            badge: "NEW",
+            specs: { cpu: "i5-8265U", ram: "8GB", storage: "256GB SSD", screen: "15.6英寸 FHD", weight: "2.03kg", battery: "45Wh", graphics: "Intel UHD 620", ports: "USB-C / HDMI / RJ45 / USB 3.1" },
+            highlights: ["适合长期办公", "实用性强", "ThinkPad 家族风格明显"]
+          }
+        ]
+      }
+    };
+    let currentBrand = "dell";
+    function renderBrands() {
+      const switcher = document.getElementById("brandSwitcher");
+      switcher.innerHTML = Object.entries(brands).map(([key, brand]) => `
+        <button class="brand-btn ${key === currentBrand ? "active" : ""}" onclick="selectBrand('${key}')">
+          <strong>${brand.name}</strong>
+          <span>${brand.products.length} 款机型</span>
+        </button>
+      `).join("");
+    }
+    function renderSummary() {
+      const brand = brands[currentBrand];
+      const summary = document.getElementById("brandSummary");
+      const priceTexts = brand.products.map(item => Number(item.price.replace(/[^\d]/g, ""))).filter(Boolean);
+      const minPrice = Math.min(...priceTexts);
+      const maxPrice = Math.max(...priceTexts);
+      summary.innerHTML = `
+        <div class="summary-card">
+          <h3>${brand.name} 产品说明</h3>
+          <p>${brand.intro}</p>
+          <ul>
+            ${brand.points.map(point => `<li>${point}</li>`).join("")}
+          </ul>
+        </div>
+        <div class="summary-card">
+          <h3>${brand.products.length} 款可展示机型</h3>
+          <p>当前品牌包含从 ${brand.products[0].model} 到 ${brand.products[brand.products.length - 1].model} 的多款商务本。</p>
+          <ul>
+            <li>价格范围：¥${minPrice.toLocaleString("zh-CN")} - ¥${maxPrice.toLocaleString("zh-CN")}</li>
+            <li>支持查看每款产品详细参数</li>
+            <li>展示内容可继续增删型号与改价</li>
+          </ul>
+        </div>
+      `;
+    }
+    function renderProducts() {
+      const grid = document.getElementById("productGrid");
+      const brand = brands[currentBrand];
+      grid.innerHTML = brand.products.map((item, index) => `
+        <article class="product-card">
+          <div class="product-visual">
+            <div class="tag-row">
+              ${item.badge ? `<span class="tag ${item.badge === "HOT" ? "tag-hot" : "tag-new"}">${item.badge}</span>` : ""}
+              <span class="tag tag-series">${item.series}</span>
+            </div>
+            <div class="mini-laptop">${item.model}</div>
+          </div>
+          <div class="product-body">
+            <h3>${item.model}</h3>
+            <p class="subtitle">${item.tagline}</p>
+            <div class="meta">
+              <div class="meta-item"><small>处理器</small><strong>${item.specs.cpu}</strong></div>
+              <div class="meta-item"><small>存储</small><strong>${item.specs.storage}</strong></div>
+              <div class="meta-item"><small>屏幕</small><strong>${item.specs.screen}</strong></div>
+              <div class="meta-item"><small>重量</small><strong>${item.specs.weight}</strong></div>
+            </div>
+            <div class="price-row">
+              <div class="price">${item.price}</div>
+              <div>${brands[currentBrand].name}</div>
+            </div>
+            <button class="detail-btn" onclick="toggleDetail('detail-${currentBrand}-${index}')">查看详情</button>
+            <div class="detail" id="detail-${currentBrand}-${index}">
+              <div class="spec-grid">
+                ${Object.entries(item.specs).map(([label, value]) => `
+                  <div class="spec">
+                    <span>${toLabel(label)}</span>
+                    <strong>${value}</strong>
+                  </div>
+                `).join("")}
+              </div>
+              <ul class="highlights">
+                ${item.highlights.map(point => `<li>${point}</li>`).join("")}
+              </ul>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+    function toLabel(key) {
+      const labels = {
+        cpu: "处理器",
+        ram: "内存",
+        storage: "存储",
+        screen: "屏幕",
+        weight: "重量",
+        battery: "电池",
+        graphics: "显卡",
+        ports: "接口"
+      };
+      return labels[key] || key;
+    }
+    function toggleDetail(id) {
+      const detail = document.getElementById(id);
+      if (detail) {
+        detail.classList.toggle("open");
+      }
+    }
+    function selectBrand(brandKey) {
+      currentBrand = brandKey;
+      renderBrands();
+      renderSummary();
+      renderProducts();
+    }
+    document.getElementById("productCount").textContent =
+      Object.values(brands).reduce((sum, brand) => sum + brand.products.length, 0);
+    renderBrands();
+    renderSummary();
+    renderProducts();
+  </script>
+</body>
+</html>
