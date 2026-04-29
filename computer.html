@@ -597,6 +597,18 @@ index.html(new)
         <h4>品牌电脑展示页</h4>
         <p>聚焦企业办公、移动商务与高性价比机型，适合二手设备展示、渠道选型和客户介绍页面。</p>
       </div>
+      <div class="product-item">
+      <div class="laptop">
+         <!-- 注意这里：onclick 传递了 this (当前点击的 screen) -->
+         <div class="screen" onclick="triggerUpload(this)">
+         <img class="preview-img" src="" style="display: none;">
+         <span>点击更换屏幕</span>
+         </div>
+         <div class="base"></div>
+      </div>
+      <!-- 每个产品自带一个隐藏的 input -->
+      <input type="file" accept="image/*" style="display: none;" onchange="handleProductUpload(this)">
+   </div>
       <div>
         <h4>快速导航</h4>
         <ul>
@@ -950,6 +962,12 @@ index.html(new)
      renderBrands();
      renderSummary();
      renderProducts();
+   } 
+   function triggerUpload(screenElement) {
+    // 找到当前产品卡片下的 input
+    const fileInput = screenElement.closest('.product-item').querySelector('input[type="file"]');
+    fileInput.click();
+    }    
    }
    function handleUpload(input) {
      const file = input.files[0]; // 【已修正】必须加 [0]
