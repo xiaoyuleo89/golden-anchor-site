@@ -964,11 +964,9 @@ index.html(new)
      renderProducts();
    } 
    function triggerUpload(screenElement) {
-    // 找到当前产品卡片下的 input
-    const fileInput = screenElement.closest('.product-item').querySelector('input[type="file"]');
-    fileInput.click();
-    }    
-   }
+     const fileInput = screenElement.closest('.product-item').querySelector('input[type="file"]');
+     fileInput.click();
+   }    
    function handleUpload(input) {
      const file = input.files[0]; // 【已修正】必须加 [0]
      if (file) {
