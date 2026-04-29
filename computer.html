@@ -939,40 +939,34 @@ index.html(new)
       };
       return labels[key] || key;
     }
- function toggleDetail(id) {
-    const detail = document.getElementById(id);
-    if (detail) {
-        detail.classList.toggle("open");
+    function toggleDetail(id) {
+      const detail = document.getElementById(id);
+      if (detail) {
+          detail.classList.toggle("open");
+      }
+   }
+   function selectBrand(brandKey) {
+     currentBrand = brandKey;
+     renderBrands();
+     renderSummary();
+     renderProducts();
+   }
+   function handleUpload(input) {
+     const file = input.files[0]; // 【已修正】必须加 [0]
+     if (file) {
+         const reader = new FileReader();
+         reader.onload = function(e) {
+             const preview = document.getElementById('preview');
+             if (preview) {
+                 preview.src = e.target.result;
+                 preview.style.display = 'block';
+                 const hint = preview.parentElement.querySelector('span');
+                 if (hint) hint.style.opacity = '0'; 
+              }
+      };
+      reader.readAsDataURL(file);
     }
-}
-
-function selectBrand(brandKey) {
-    currentBrand = brandKey;
-    renderBrands();
-    renderSummary();
-    renderProducts();
-}
-
-// --- 图片上传核心逻辑 ---
-function handleUpload(input) {
-    const file = input.files[0]; // 【已修正】必须加 [0]
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const preview = document.getElementById('preview');
-            if (preview) {
-                preview.src = e.target.result;
-                preview.style.display = 'block';
-                // 可选：上传成功后隐藏“点击上传”文字
-                const hint = preview.parentElement.querySelector('span');
-                if (hint) hint.style.opacity = '0'; 
-            }
-        };
-        reader.readAsDataURL(file);
-    }
-} // 【已修正】补全了大括号
-
-// --- 初始化执行（建议包裹在 window.onload 中） ---
+} 
 window.onload = function() {
     const productCountElem = document.getElementById("productCount");
     if (productCountElem && typeof brands !== 'undefined') {
