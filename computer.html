@@ -543,8 +543,8 @@ index.html(new)
               <div class="laptop">
               <div class="screen" onclick="document.getElementById('fileInput').click()">
     <!-- 用于展示预览图 -->
-              <img id="preview" src="your-placeholder.png" alt="点击上传"
-              <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="handleUpload(this)
+              <img id="preview" src="your-placeholder.png" alt="点击上传">
+              <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="handleUpload(this)">
               <span>点击上传图片</span>
               </div>
               <div class="base"></div>
@@ -956,6 +956,19 @@ index.html(new)
     renderBrands();
     renderSummary();
     renderProducts();
+    }
+    function handleUpload(input) {
+    const file = input.files[0]; // 获取选中的第一个文件
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const preview = document.getElementById('preview');
+            preview.src = e.target.result; // 将图片基地赋值给 src
+            preview.style.display = 'block'; // 显示图片
+        };
+        reader.readAsDataURL(file);
+    }
+}
   </script>
 </body>
 </html>
