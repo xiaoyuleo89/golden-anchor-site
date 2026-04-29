@@ -585,23 +585,11 @@ index.html(new)
           <div>
             <h2>产品展示</h2>
             <p>点击“查看详情”可以展开该机型的技术参数与亮点说明。</p>
-             <div class="product-item">
-      <div class="laptop">
-         <!-- 注意这里：onclick 传递了 this (当前点击的 screen) -->
-         <div class="screen" onclick="triggerUpload(this)">
-         <img class="preview-img" src="" style="display: none;">
-         <span>点击更换屏幕</span>
-         </div>
-         <div class="base"></div>
-      </div>
-      <!-- 每个产品自带一个隐藏的 input -->
-      <input type="file" accept="image/*" style="display: none;" onchange="handleProductUpload(this)">
-   </div>
           </div>
-        </div>
-        <div class="product-grid" id="productGrid"></div>
-      </div>
-    </section>
+         </div>
+         <div class="product-grid" id="productGrid"></div>
+       </div>
+     </section>
   </main>
   <footer class="footer">
     <div class="container footer-grid">
