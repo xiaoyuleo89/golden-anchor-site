@@ -164,35 +164,32 @@ index.html(new)
       box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
       position: relative;
     }
-    .screen {
-    position: relative !important;
-    padding: 0 !important; /* 必须清空内边距 */
-    overflow: hidden !important;
-     display: flex;
+  .screen {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    cursor: pointer; /* 鼠标移上去变小手 */
+    overflow: hidden;
+    display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-    font-weight: 800;
-    padding: 0;
-    overflow: hidden;
-    }
-    .screen img {
-        /* 隐藏文字 */
-     color: transparent !important;
-     background-image: url('fab879d1-f2ab-4129-a815-677c25b3d134.png');
-     background-size: cover;    /* 自动裁切以铺满 */
-     background-position: center; /* 居中 */
-     background-repeat: no-repeat;
-    }
-      position: absolute !important;
-      top: 0 !important;
-      left: 0 !important;
-      width: 100%;
-      height: 100%;
-      object-fit: cover
-      border-radius: 10px;
-     
-     
+    background-color: #f0f0f0;
+    border-radius: 10px;
+}
+
+.screen img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 保证图片铺满不变形 */
+    z-index: 1;
+}
+
+.screen span {
+    position: relative;
+    z-index: 2; /* 文字浮在图片上方 */
+    pointer-events: none; /* 让点击穿透文字，直接触发容器点击 */
+}
     }
     .base {
       width: min(98%, 410px);
@@ -544,8 +541,11 @@ index.html(new)
           <div class="laptop-visual">
             <div>
               <div class="laptop">
-              <div class="screen">
-
+              <div class="screen" onclick="document.getElementById('fileInput').click()">
+    <!-- 用于展示预览图 -->
+              <img id="preview" src="your-placeholder.png" alt="点击上传"
+              <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="handleUpload(this)
+              <span>点击上传图片</span>
               </div>
               <div class="base"></div>
             </div>
