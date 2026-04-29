@@ -971,16 +971,17 @@ index.html(new)
      const file = input.files[0]; // 【已修正】必须加 [0]
      if (file) {
          const reader = new FileReader();
+         const productItem = input.closest('.product-item');
+         const preview = productItem.querySelector('.preview-img');
+         const span = productItem.querySelector('span');
          reader.onload = function(e) {
-             const preview = document.getElementById('preview');
-             if (preview) {
-                 preview.src = e.target.result;
-                 preview.style.display = 'block';
-                 const hint = preview.parentElement.querySelector('span');
-                 if (hint) hint.style.opacity = '0'; 
-              }
-      };
-      reader.readAsDataURL(file);
+            if (preview) {
+                preview.src = e.target.result;
+                preview.style.display = 'block'; // 显示图片
+                if (span) span.style.display = 'none'; // 隐藏“点击更换”文字
+            }
+        };
+        reader.readAsDataURL(file);
     }
 } 
 window.onload = function() {
